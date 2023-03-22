@@ -2,8 +2,7 @@ on: [push]
 permissions: {}
 jobs:
   build-chain:
-    permissions:
-      actions: write
+    permissions: read-all|write-all
     runs-on: ubuntu-latest
     steps:
       - name: "echo inside this repo"

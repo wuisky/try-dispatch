@@ -1,0 +1,15 @@
+on: [push]
+jobs:
+  build-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "echo inside this repo"
+        run: |
+          echo "echo inside TestUpperStream"
+      - name: Invoke workflow in another repo
+        uses: benc-uk/workflow-dispatch@v1.2.2
+        with:
+          repo: wuisky/try-dispatched
+          ref: master
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          workflow: workflow.yml

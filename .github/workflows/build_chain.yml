@@ -13,6 +13,6 @@ jobs:
         with:
           repo: wuisky/try-dispatched
           ref: master
-          token: "${{ secrets.GITHUB_TOKEN }}"
+          # token: "${{ secrets.GITHUB_TOKEN }}"
           workflow: workflow.yml
           inputs: '{"push_to_registries": "true"}'

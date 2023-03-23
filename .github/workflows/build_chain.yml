@@ -19,13 +19,13 @@ jobs:
           retain_days: 0
           keep_minimum_runs: 0
       - name: Invoke workflow in another repo
-        uses: benc-uk/workflow-dispatch@v1.1
+        uses: benc-uk/workflow-dispatch@v1.2.2
         with:
           repo: wuisky/try-dispatched
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
-          inputs: "{ 'upstream_branch': '${{ github.head_ref }}'}"
+        #  inputs: "{ 'upstream_branch': '${{ github.head_ref }}'}"
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common

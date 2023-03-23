@@ -24,3 +24,6 @@ jobs:
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
           intervalSeconds: 10
+      - name: Print result
+        run: |
+          echo ${steps.wait-for-build-common.outputs.conclusion}

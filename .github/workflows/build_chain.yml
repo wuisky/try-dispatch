@@ -24,4 +24,3 @@ jobs:
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
           intervalSeconds: 30
-n

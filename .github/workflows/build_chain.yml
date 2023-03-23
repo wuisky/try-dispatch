@@ -3,7 +3,8 @@ permissions: {}
 jobs:
   build-chain:
     env:
-      GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
+      GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
+      # GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +33,7 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
-          intervalSeconds: 10
+          intervalSeconds: 5
       - name: Build failure
         if: steps.wait-for-build-common.outputs.conclusion != 'success'
         uses: actions/github-script@v6.4.0

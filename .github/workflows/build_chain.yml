@@ -1,4 +1,4 @@
-on: [push]
+on: [pull_request]
 permissions: {}
 jobs:
   build-chain:
@@ -25,7 +25,7 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
-          inputs: "{ 'upstream_branch': '${{ github.ref }}', 'sha': '${{ github.sha }}'}"
+          inputs: "{ 'upstream_branch': '${{ github.head_ref }}', 'sha': '${{ github.sha }}'}"
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common

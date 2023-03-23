@@ -20,7 +20,7 @@ jobs:
         id: wait-for-build-common
         with:
           repo: try-dispatched
-          ref: master
+          # ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
           intervalSeconds: 10

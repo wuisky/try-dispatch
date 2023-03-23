@@ -22,5 +22,5 @@ jobs:
           repo: wuisky/try-dispatched
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
-          checkName: build-chain
+          checkName: "echo inside this repo"
           intervalSeconds: 30

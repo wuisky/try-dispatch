@@ -31,7 +31,8 @@ jobs:
         with:
           repo: wuisky/try-dispatched
           ref: master
-          token: ${{ secrets.STANDARD_RIGHTS }}
+          # token: ${{ secrets.STANDARD_RIGHTS }}
+          token: ${{ steps.generate_token.outputs.token }}
           workflow: workflow.yml
           inputs: '{ "upstream_branch": "${{ github.head_ref }}"}'
       - name: Wait dispatch

@@ -25,7 +25,7 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
-        #  inputs: "{ 'upstream_branch': '${{ github.head_ref }}'}"
+          inputs: "{ 'upstream_branch': ${{ github.head_ref }}}"
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common

@@ -2,8 +2,8 @@ on: [pull_request]
 permissions: {}
 jobs:
   build-chain:
-    env:
-      GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
+    # env:
+    #  GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
       # GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
     permissions: write-all
     runs-on: ubuntu-latest

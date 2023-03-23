@@ -24,6 +24,9 @@ jobs:
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
           intervalSeconds: 10
-      - name: Print result
-        run: |
-          echo ${steps.wait-for-build-common.outputs.conclusion}
+      - name: Build failure
+        if: steps.wait-for-build-common.outputs.conclusion != 'success'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Build failed!')

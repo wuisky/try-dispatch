@@ -5,7 +5,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: "echo inside this repo"
+      - name: Echo inside this repo
         run: |
           echo "echo inside TestUpperStream"
       - name: Invoke workflow in another repo
@@ -15,3 +15,13 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
+      - name: Wait dispatch
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: wait-for-build-common
+        with:
+          repo: wuisky/try-dispatched
+          ref: master
+          token: ${{ secrets.STANDARD_RIGHTS }}
+          checkName: build-chain
+          intervalSeconds: 30
+n

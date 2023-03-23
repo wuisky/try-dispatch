@@ -2,12 +2,21 @@ on: [push]
 permissions: {}
 jobs:
   build-chain:
+    env:
+      GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Echo inside this repo
         run: |
           echo "echo inside TestUpperStream"
+      - name: Delete workflow runs
+        uses: MajorScruffy/delete-old-workflow-runs@v0.2.0
+        with:
+          repository: wuisky/try-dispatched
+          older-than-seconds: 1
+          workflow: .github/workflows/workflow.yml
+          # event: workflow_dispatch
       - name: Invoke workflow in another repo
         uses: benc-uk/workflow-dispatch@v1.2.2
         with:
@@ -15,9 +24,6 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
-      - name: Wait before check
-        run: |
-          sleep 120
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common

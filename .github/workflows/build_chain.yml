@@ -19,7 +19,7 @@ jobs:
           retain_days: 0
           keep_minimum_runs: 0
       - name: Invoke workflow in another repo
-        uses: benc-uk/workflow-dispatch@v1.2.2
+        uses: benc-uk/workflow-dispatch@v1.1
         with:
           repo: wuisky/try-dispatched
           ref: master

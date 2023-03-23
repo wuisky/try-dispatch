@@ -17,7 +17,7 @@ jobs:
           workflow: workflow.yml
       - name: Wait before check
         run: |
-          sleep 10
+          sleep 120
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common

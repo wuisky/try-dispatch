@@ -19,8 +19,8 @@ jobs:
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common
         with:
-          repo: wuisky/try-dispatched
+          repo: try-dispatched
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
-          checkName: "echo inside this repo"
-          intervalSeconds: 30
+          checkName: build-chain
+          intervalSeconds: 10

@@ -16,4 +16,3 @@ jobs:
           # token: "${{ secrets.GITHUB_TOKEN }}"
           token: "${{ secrets.STANDARD_RIGHTS }}"
           workflow: workflow.yml
-          inputs: '{"push_to_registries": "true"}'

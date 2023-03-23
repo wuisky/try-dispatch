@@ -15,12 +15,15 @@ jobs:
           ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           workflow: workflow.yml
+      - name: Wait before check
+        run: |
+          sleep 10
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common
         with:
           repo: try-dispatched
-          # ref: master
+          ref: master
           token: ${{ secrets.STANDARD_RIGHTS }}
           checkName: build-chain
           intervalSeconds: 10

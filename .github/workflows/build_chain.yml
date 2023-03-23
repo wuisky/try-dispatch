@@ -11,10 +11,18 @@ jobs:
       - name: Echo inside this repo
         run: |
           echo "echo inside TestUpperStream"
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
-          token: ${{ secrets.APP_ID }}
+          # token: ${{ secrets.STANDARD_RIGHTS }}
+          token: ${{ steps.generate_token.outputs.token }}
           repository: wuisky/try-dispatched
           retain_days: 0
           keep_minimum_runs: 0

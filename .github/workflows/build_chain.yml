@@ -1,26 +1,28 @@
-on: [push]
-permissions: {}
+on: [pull_request]
+# permissions: {}
 jobs:
   build-chain:
-    env:
-      GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
-    permissions: write-all
+    # env:
+    #  GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
+      # GITHUB_TOKEN: ${{ secrets.STANDARD_RIGHTS }}
+    # permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Echo inside this repo
         run: |
           echo "echo inside TestUpperStream"
-      # - name: Delete workflow runs
-      #   uses: MajorScruffy/delete-old-workflow-runs@v0.2.0
-      #   with:
-      #     repository: wuisky/try-dispatched
-      #     older-than-seconds: 1
-      #     workflow: .github/workflows/workflow.yml
-      #     # event: workflow_dispatch
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Delete workflow runs
         uses: Mattraks/delete-workflow-runs@v2
         with:
-          token: ${{ secrets.STANDARD_RIGHTS }}
+          # token: ${{ secrets.STANDARD_RIGHTS }}
+          token: ${{ steps.generate_token.outputs.token }}
           repository: wuisky/try-dispatched
           retain_days: 0
           keep_minimum_runs: 0
@@ -29,17 +31,20 @@ jobs:
         with:
           repo: wuisky/try-dispatched
           ref: master
-          token: ${{ secrets.STANDARD_RIGHTS }}
+          # token: ${{ secrets.STANDARD_RIGHTS }}
+          token: ${{ steps.generate_token.outputs.token }}
           workflow: workflow.yml
+          inputs: '{ "upstream_branch": "${{ github.head_ref }}"}'
       - name: Wait dispatch
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: wait-for-build-common
         with:
           repo: try-dispatched
           ref: master
-          token: ${{ secrets.STANDARD_RIGHTS }}
+          # token: ${{ secrets.STANDARD_RIGHTS }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           checkName: build-chain
-          intervalSeconds: 10
+          intervalSeconds: 5
       - name: Build failure
         if: steps.wait-for-build-common.outputs.conclusion != 'success'
         uses: actions/github-script@v6.4.0
